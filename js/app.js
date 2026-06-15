@@ -17,7 +17,28 @@
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  /* ----- 2. 赛程渲染 ----- */
+  /* ----- 2. 新闻渲染（从 JSON 加载） ----- */
+  function renderNews() {
+    const grid = document.getElementById('newsGrid');
+    fetch('data/news.json').then(r => r.json()).then(news => {
+      grid.innerHTML = news.map(n => `
+        <article class="news-card fade-in">
+          <img src="${n.image}" alt="${n.title}" loading="lazy">
+          <div class="news-card-body">
+            <span class="news-tag ${n.tag}">${n.tagLabel}</span>
+            <h3>${n.title}</h3>
+            <p>${n.summary}</p>
+            <div class="date"><i class="far fa-clock"></i> ${n.date}</div>
+          </div>
+        </article>
+      `).join('');
+    }).catch(() => {
+      grid.innerHTML = '<p style="color:#999;text-align:center;">新闻数据加载失败</p>';
+    });
+  }
+  renderNews();
+
+  /* ----- 3. 赛程渲染 ----- */
   const matches = [
     { round: 15, date: '2026-06-20', time: '19:35', home: '大连英博', away: '上海海港', score: null, status: '未开始' },
     { round: 14, date: '2026-06-14', time: '19:35', home: '武汉三镇', away: '大连英博', score: '1-2', status: '已结束' },
@@ -88,7 +109,7 @@
   }
   renderGallery();
 
-  /* ----- 4. Lightbox ----- */
+  /* ----- 5. Lightbox ----- */
   const lightbox     = document.getElementById('lightbox');
   const lightboxImg  = document.getElementById('lightboxImg');
   document.getElementById('galleryGrid').addEventListener('click', function(e) {
@@ -102,12 +123,12 @@
     this.classList.remove('show');
   });
 
-  /* ----- 5. 移动端导航 ----- */
+  /* ----- 6. 移动端导航 ----- */
   document.getElementById('navToggle').addEventListener('click', function() {
     document.getElementById('navLinks').classList.toggle('open');
   });
 
-  /* ----- 6. 滚动高亮 & 渐入动画 ----- */
+  /* ----- 7. 滚动高亮 & 渐入动画 ----- */
   const sections = document.querySelectorAll('section[id]');
   const navItems = document.querySelectorAll('.nav-links a');
 
