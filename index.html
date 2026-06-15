@@ -4,360 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>大连英博 · 蓝色信仰</title>
-  <!-- Font Awesome 图标库 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <style>
-    /* ===== 全局重置 & 变量 ===== */
-    :root {
-      --blue-900: #0a1a3a;
-      --blue-800: #0f2a5e;
-      --blue-700: #1a3f8a;
-      --blue-600: #2563eb;
-      --blue-500: #3b82f6;
-      --blue-400: #60a5fa;
-      --blue-200: #bfdbfe;
-      --blue-50: #eff6ff;
-      --gold: #f59e0b;
-      --gold-light: #fbbf24;
-      --gray-100: #f3f4f6;
-      --gray-200: #e5e7eb;
-      --gray-400: #9ca3af;
-      --gray-600: #4b5563;
-      --gray-800: #1f2937;
-      --white: #ffffff;
-      --radius: 12px;
-      --shadow: 0 4px 24px rgba(0,0,0,.08);
-      --shadow-hover: 0 8px 40px rgba(0,0,0,.14);
-      --font: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--font);
-      background: var(--gray-100);
-      color: var(--gray-800);
-      line-height: 1.6;
-    }
-    a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; display: block; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-    /* ===== 顶部导航 ===== */
-    .navbar {
-      position: fixed; top: 0; left: 0; right: 0;
-      background: rgba(10,26,58,.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      z-index: 1000;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-    .navbar .container {
-      display: flex; align-items: center; justify-content: space-between;
-      height: 64px;
-    }
-    .nav-logo {
-      display: flex; align-items: center; gap: 10px;
-      color: var(--white); font-weight: 700; font-size: 20px;
-    }
-    .nav-logo svg { width: 36px; height: 36px; }
-    .nav-links {
-      display: flex; gap: 8px; list-style: none;
-    }
-    .nav-links a {
-      color: rgba(255,255,255,.75);
-      padding: 8px 16px; border-radius: 8px;
-      font-size: 14px; font-weight: 500;
-      transition: all .2s;
-    }
-    .nav-links a:hover,
-    .nav-links a.active { color: #fff; background: rgba(255,255,255,.12); }
-    .nav-toggle {
-      display: none; background: none; border: none; color: #fff;
-      font-size: 24px; cursor: pointer;
-    }
-
-    /* ===== Hero 大图 ===== */
-    .hero {
-      margin-top: 64px;
-      position: relative;
-      height: 70vh; min-height: 480px;
-      background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 50%, var(--blue-600) 100%);
-      display: flex; align-items: center; justify-content: center;
-      text-align: center; color: var(--white);
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background: url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1600&q=80') center/cover no-repeat;
-      opacity: .18;
-    }
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at center, transparent 0%, rgba(10,26,58,.5) 100%);
-    }
-    .hero-content { position: relative; z-index: 2; padding: 0 20px; }
-    .hero-badge {
-      display: inline-block;
-      background: var(--gold); color: var(--blue-900);
-      padding: 4px 18px; border-radius: 20px;
-      font-size: 13px; font-weight: 700; margin-bottom: 16px;
-    }
-    .hero h1 { font-size: clamp(2rem, 6vw, 4rem); font-weight: 800; letter-spacing: 2px; }
-    .hero h1 small { display: block; font-size: .45em; font-weight: 400; opacity: .7; margin-top: 6px; }
-    .hero p { font-size: 1.1rem; opacity: .85; margin: 12px 0 28px; }
-
-    /* 倒计时 */
-    .countdown {
-      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
-    }
-    .countdown-item {
-      background: rgba(255,255,255,.12);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: var(--radius);
-      padding: 12px 22px;
-      min-width: 80px;
-    }
-    .countdown-item .num {
-      font-size: 2rem; font-weight: 800; display: block;
-    }
-    .countdown-item .label {
-      font-size: .75rem; opacity: .6;
-    }
-    .hero-matchup {
-      margin-top: 24px;
-      display: flex; align-items: center; justify-content: center; gap: 24px;
-      font-size: clamp(1.4rem, 3.5vw, 2.6rem);
-      font-weight: 800; color: #fff;
-    }
-    .hero-matchup .team {
-      display: flex; align-items: center; gap: 10px;
-    }
-    .hero-matchup .team svg {
-      width: 44px; height: 44px;
-      flex-shrink: 0;
-    }
-    .hero-matchup .colon {
-      font-size: 1.2em;
-      font-weight: 300;
-      opacity: .5;
-    }
-
-    /* ===== 通栏标题 ===== */
-    .section-title {
-      text-align: center;
-      margin: 60px 0 36px;
-    }
-    .section-title h2 {
-      font-size: 1.8rem; font-weight: 800; color: var(--blue-900);
-    }
-    .section-title p {
-      color: var(--gray-400); margin-top: 6px; font-size: .95rem;
-    }
-    .section-title .bar {
-      width: 48px; height: 3px; background: var(--gold);
-      margin: 12px auto 0; border-radius: 3px;
-    }
-
-    /* ===== 新闻卡片 ===== */
-    .news-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 24px;
-    }
-    .news-card {
-      background: var(--white); border-radius: var(--radius);
-      overflow: hidden; box-shadow: var(--shadow);
-      transition: transform .25s, box-shadow .25s;
-      cursor: pointer;
-    }
-    .news-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
-    }
-    .news-card img {
-      width: 100%; height: 200px; object-fit: cover;
-    }
-    .news-card-body { padding: 18px; }
-    .news-tag {
-      display: inline-block;
-      font-size: .7rem; font-weight: 600;
-      padding: 2px 10px; border-radius: 4px;
-      margin-bottom: 8px;
-    }
-    .news-tag.match   { background: #dcfce7; color: #166534; }
-    .news-tag.offcial { background: #dbeafe; color: #1e40af; }
-    .news-tag.story   { background: #fef3c7; color: #92400e; }
-    .news-card-body h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
-    .news-card-body p  { font-size: .88rem; color: var(--gray-600); }
-    .news-card-body .date {
-      font-size: .75rem; color: var(--gray-400);
-      margin-top: 10px; display: flex; align-items: center; gap: 4px;
-    }
-
-    /* ===== 赛程表 ===== */
-    .schedule-list { display: flex; flex-direction: column; gap: 12px; }
-    .match-row {
-      display: flex; align-items: center; justify-content: space-between;
-      background: var(--white); border-radius: var(--radius);
-      padding: 16px 24px; box-shadow: var(--shadow);
-      transition: transform .2s;
-    }
-    .match-row:hover { transform: translateX(4px); }
-    .match-row .teams {
-      display: flex; align-items: center; gap: 16px; flex: 1;
-    }
-    .match-row .team-name { font-weight: 700; font-size: 1rem; }
-    .match-row .vs { color: var(--gray-400); font-size: .85rem; font-weight: 600; }
-    .match-row .score {
-      font-size: 1.4rem; font-weight: 800;
-      color: var(--blue-700);
-      min-width: 60px; text-align: center;
-    }
-    .match-row .score.tbd { color: var(--gray-400); font-size: .9rem; }
-    .match-row .meta {
-      text-align: right; font-size: .78rem; color: var(--gray-400);
-      min-width: 100px;
-    }
-    .match-row .status-badge {
-      display: inline-block;
-      font-size: .7rem; padding: 2px 10px; border-radius: 12px;
-      font-weight: 600; margin-left: 12px;
-    }
-    .status-badge.win  { background: #dcfce7; color: #166534; }
-    .status-badge.lose { background: #fee2e2; color: #991b1b; }
-    .status-badge.draw { background: #fef3c7; color: #92400e; }
-    .status-badge.upcoming { background: #dbeafe; color: #1e40af; }
-
-    /* ===== 图片墙 ===== */
-    .gallery-grid {
-      columns: 3; column-gap: 16px;
-    }
-    .gallery-grid .item {
-      break-inside: avoid; margin-bottom: 16px;
-      border-radius: var(--radius); overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: transform .25s; cursor: pointer;
-      position: relative;
-    }
-    .gallery-grid .item:hover { transform: scale(1.02); }
-    .gallery-grid .item img { width: 100%; display: block; }
-    .gallery-grid .item .caption {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,.7));
-      color: #fff; padding: 30px 14px 12px;
-      font-size: .82rem; opacity: 0;
-      transition: opacity .25s;
-    }
-    .gallery-grid .item:hover .caption { opacity: 1; }
-
-    /* ===== 队史时间线 ===== */
-    .timeline {
-      position: relative; padding-left: 40px;
-    }
-    .timeline::before {
-      content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
-      width: 3px; background: var(--blue-300, #93c5fd);
-      border-radius: 3px;
-    }
-    .timeline-item {
-      position: relative; margin-bottom: 32px;
-    }
-    .timeline-item::before {
-      content: ''; position: absolute; left: -28px; top: 6px;
-      width: 14px; height: 14px;
-      background: var(--blue-600); border: 3px solid var(--blue-200);
-      border-radius: 50%;
-    }
-    .timeline-item .year {
-      font-size: 1.3rem; font-weight: 800; color: var(--blue-700);
-    }
-    .timeline-item .desc {
-      font-size: .92rem; color: var(--gray-600); margin-top: 2px;
-    }
-
-    /* ===== 页脚 ===== */
-    footer {
-      margin-top: 80px;
-      background: var(--blue-900); color: rgba(255,255,255,.7);
-      padding: 48px 0 28px;
-    }
-    footer .container {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 40px;
-    }
-    footer h3 { color: #fff; font-size: 1rem; margin-bottom: 14px; }
-    footer p, footer a { font-size: .88rem; }
-    footer .social a {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 38px; height: 38px;
-      background: rgba(255,255,255,.08);
-      border-radius: 50%;
-      margin: 0 6px 6px 0;
-      transition: background .2s; color: rgba(255,255,255,.7);
-    }
-    footer .social a:hover { background: var(--blue-600); color: #fff; }
-    .footer-bottom {
-      text-align: center; padding-top: 28px; margin-top: 40px;
-      border-top: 1px solid rgba(255,255,255,.06);
-      font-size: .8rem;
-    }
-
-    /* ===== Lightbox ===== */
-    .lightbox {
-      display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,.88); z-index: 2000;
-      align-items: center; justify-content: center;
-      cursor: zoom-out;
-    }
-    .lightbox.show { display: flex; }
-    .lightbox img {
-      max-width: 90vw; max-height: 90vh;
-      border-radius: 8px; box-shadow: 0 8px 60px rgba(0,0,0,.5);
-    }
-
-    /* ===== 响应式 ===== */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .nav-toggle { display: block; }
-      .nav-links.open {
-        display: flex; flex-direction: column;
-        position: absolute; top: 64px; left: 0; right: 0;
-        background: var(--blue-900); padding: 12px 20px 20px;
-        border-bottom: 1px solid rgba(255,255,255,.08);
-      }
-      .hero { height: 60vh; min-height: 400px; }
-      .hero-matchup { gap: 12px; }
-      .hero-matchup .team svg { width: 32px; height: 32px; }
-      .gallery-grid { columns: 2; }
-      footer .container { grid-template-columns: 1fr; }
-      .match-row { flex-wrap: wrap; gap: 8px; }
-      .match-row .meta { text-align: left; }
-    }
-    @media (max-width: 480px) {
-      .gallery-grid { columns: 1; }
-      .news-grid { grid-template-columns: 1fr; }
-      .countdown-item { min-width: 60px; padding: 8px 14px; }
-      .countdown-item .num { font-size: 1.4rem; }
-    }
-
-    /* ===== 入场动画 ===== */
-    .fade-in {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity .6s ease, transform .6s ease;
-    }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- ==================== 导航 ==================== -->
+<!-- ===== 导航 ===== -->
 <nav class="navbar">
   <div class="container">
     <div class="nav-logo">
-      <!-- 简约盾牌队徽 SVG -->
       <svg viewBox="0 0 36 36" fill="none">
         <path d="M18 2L4 10v8c0 8.5 6 16.5 14 18 8-1.5 14-9.5 14-18v-8L18 2z" fill="#2563eb"/>
         <path d="M18 6L8 12v6c0 6.5 4.2 12.6 10 13.8 5.8-1.2 10-7.3 10-13.8v-6L18 6z" fill="#1a3f8a"/>
@@ -379,7 +34,7 @@
   </div>
 </nav>
 
-<!-- ==================== Hero / 首页 ==================== -->
+<!-- ===== Hero ===== -->
 <section class="hero" id="home">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
@@ -398,9 +53,11 @@
       <div class="countdown-item"><span class="num" id="cdMins">--</span><span class="label">分</span></div>
       <div class="countdown-item"><span class="num" id="cdSecs">--</span><span class="label">秒</span></div>
     </div>
+
+    <!-- 下一场对阵 -->
     <div class="hero-matchup">
       <span class="team">
-        <svg viewBox="0 0 36 36" fill="none" style="width:44px;height:44px;">
+        <svg viewBox="0 0 36 36" fill="none">
           <path d="M18 2L4 10v8c0 8.5 6 16.5 14 18 8-1.5 14-9.5 14-18v-8L18 2z" fill="#2563eb"/>
           <path d="M18 6L8 12v6c0 6.5 4.2 12.6 10 13.8 5.8-1.2 10-7.3 10-13.8v-6L18 6z" fill="#1a3f8a"/>
           <circle cx="18" cy="18" r="5" fill="#fbbf24"/>
@@ -416,45 +73,19 @@
 
 <div class="container">
 
-<!-- ==================== 新闻资讯 ==================== -->
+<!-- ===== 新闻 ===== -->
 <section id="news">
   <div class="section-title fade-in">
     <h2><i class="fas fa-newspaper"></i> 最新资讯</h2>
     <p>英博动态，一手掌握</p>
     <div class="bar"></div>
   </div>
-  <div class="news-grid">
-    <article class="news-card fade-in">
-      <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=600&q=80" alt="比赛精彩瞬间" loading="lazy">
-      <div class="news-card-body">
-        <span class="news-tag match">战报</span>
-        <h3>中超第14轮：大连英博 2-1 武汉三镇</h3>
-        <p>上半场第23分钟，外援前锋打破僵局；下半场对方扳平后，替补奇兵第87分钟绝杀！主场三连胜！</p>
-        <div class="date"><i class="far fa-clock"></i> 2026-06-14</div>
-      </div>
-    </article>
-    <article class="news-card fade-in">
-      <img src="https://images.unsplash.com/photo-1511882150382-421056c89033?w=600&q=80" alt="球员训练" loading="lazy">
-      <div class="news-card-body">
-        <span class="news-tag offcial">官宣</span>
-        <h3>新援抵达！巴西中场正式加盟</h3>
-        <p>夏季转会窗首签，28岁的巴西中场已抵达大连完成体检，将身披10号球衣征战下半赛季。</p>
-        <div class="date"><i class="far fa-clock"></i> 2026-06-12</div>
-      </div>
-    </article>
-    <article class="news-card fade-in">
-      <img src="https://images.unsplash.com/photo-1459865264687-595d652de67e?w=600&q=80" alt="球迷开放日" loading="lazy">
-      <div class="news-card-body">
-        <span class="news-tag story">故事</span>
-        <h3>蓝色开放日：两千名球迷走进训练基地</h3>
-        <p>上周末的球迷开放日，球员与球迷零距离互动——签名、合影、对抗赛，看台歌声响彻训练场。</p>
-        <div class="date"><i class="far fa-clock"></i> 2026-06-08</div>
-      </div>
-    </article>
+  <div class="news-grid" id="newsGrid">
+    <!-- 数据由 js/app.js 通过 JSON 渲染 -->
   </div>
 </section>
 
-<!-- ==================== 赛程 ==================== -->
+<!-- ===== 赛程 ===== -->
 <section id="schedule">
   <div class="section-title fade-in">
     <h2><i class="fas fa-calendar-check"></i> 赛程 &amp; 战绩</h2>
@@ -462,11 +93,11 @@
     <div class="bar"></div>
   </div>
   <div class="schedule-list" id="scheduleList">
-    <!-- JS 动态渲染 -->
+    <!-- 数据由 js/app.js 渲染 -->
   </div>
 </section>
 
-<!-- ==================== 图片墙 ==================== -->
+<!-- ===== 图片墙 ===== -->
 <section id="gallery">
   <div class="section-title fade-in">
     <h2><i class="fas fa-images"></i> 赛季图鉴</h2>
@@ -474,11 +105,11 @@
     <div class="bar"></div>
   </div>
   <div class="gallery-grid" id="galleryGrid">
-    <!-- JS 动态渲染 -->
+    <!-- 数据由 js/app.js 渲染 -->
   </div>
 </section>
 
-<!-- ==================== 队史 ==================== -->
+<!-- ===== 队史 ===== -->
 <section id="history">
   <div class="section-title fade-in">
     <h2><i class="fas fa-trophy"></i> 队史馆</h2>
@@ -515,7 +146,7 @@
 
 </div><!-- /container -->
 
-<!-- ==================== 页脚 ==================== -->
+<!-- ===== 页脚 ===== -->
 <footer>
   <div class="container">
     <div>
@@ -547,147 +178,11 @@
   </div>
 </footer>
 
-<!-- ==================== Lightbox ==================== -->
+<!-- ===== Lightbox ===== -->
 <div class="lightbox" id="lightbox">
   <img id="lightboxImg" src="" alt="放大图片">
 </div>
 
-<!-- ==================== JavaScript ==================== -->
-<script>
-(function() {
-  'use strict';
-
-  /* ===== 1. 倒计时 ===== */
-  function updateCountdown() {
-    // 下一场比赛：2026-06-20 19:35（北京时间）
-    const matchDay = new Date('2026-06-20T19:35:00+08:00').getTime();
-    const now = Date.now();
-    const diff = Math.max(0, matchDay - now);
-
-    document.getElementById('cdDays').textContent  = String(Math.floor(diff / 86400000)).padStart(2, '0');
-    document.getElementById('cdHours').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
-    document.getElementById('cdMins').textContent  = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-    document.getElementById('cdSecs').textContent  = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-  }
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-
-  /* ===== 2. 赛程数据 & 渲染 ===== */
-  const matches = [
-    { round: 15, date: '2026-06-20', time: '19:35', home: '大连英博', away: '上海海港', score: null, status: '未开始' },
-    { round: 14, date: '2026-06-14', time: '19:35', home: '武汉三镇', away: '大连英博', score: '1-2', status: '已结束' },
-    { round: 13, date: '2026-05-26', time: '19:35', home: '大连英博', away: '北京国安', score: '3-3', status: '已结束' },
-    { round: 12, date: '2026-05-18', time: '19:35', home: '山东泰山', away: '大连英博', score: '2-0', status: '已结束' },
-    { round: 11, date: '2026-05-11', time: '19:35', home: '大连英博', away: '成都蓉城', score: '1-0', status: '已结束' },
-  ];
-
-  function renderSchedule() {
-    const list = document.getElementById('scheduleList');
-    list.innerHTML = matches.map(m => {
-      const isDone  = m.status === '已结束';
-      const isYingboHome = m.home === '大连英博';
-      let badge = '';
-      let scoreHtml = '';
-      if (isDone) {
-        const [h, a] = (m.score || '0-0').split('-').map(Number);
-        const ybScore = isYingboHome ? h : a;
-        const opScore = isYingboHome ? a : h;
-        const result = ybScore > opScore ? 'win' : ybScore < opScore ? 'lose' : 'draw';
-        const label  = { win: '胜', lose: '负', draw: '平' }[result];
-        badge = `<span class="status-badge ${result}">${label}</span>`;
-        scoreHtml = `<span class="score">${m.score}</span>`;
-      } else {
-        badge = `<span class="status-badge upcoming">未赛</span>`;
-        scoreHtml = `<span class="score tbd">vs</span>`;
-      }
-      return `
-        <div class="match-row fade-in">
-          <div class="teams">
-            <span class="team-name">${m.home}</span>
-            <span class="vs">vs</span>
-            <span class="team-name">${m.away}</span>
-          </div>
-          ${scoreHtml}
-          <div class="meta">
-            <div>第${m.round}轮 · ${m.date}</div>
-            <div style="margin-top:2px;">${m.time}${badge}</div>
-          </div>
-        </div>
-      `;
-    }).join('');
-  }
-  renderSchedule();
-
-  /* ===== 3. 图片墙（Unsplash 足球主题） ===== */
-  const galleryImages = [
-    { src: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=500&q=80', caption: '绿茵激战' },
-    { src: 'https://images.unsplash.com/photo-1511882150382-421056c89033?w=500&q=80', caption: '训练时刻' },
-    { src: 'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=500&q=80', caption: '蓝色看台' },
-    { src: 'https://images.unsplash.com/photo-1459865264687-595d652de67e?w=500&q=80', caption: '球迷开放日' },
-    { src: 'https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=500&q=80', caption: '战斗到最后一刻' },
-    { src: 'https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=500&q=80', caption: '大连·足球城' },
-    { src: 'https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=500&q=80', caption: '更衣室集结' },
-    { src: 'https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=500&q=80', caption: '庆祝瞬间' },
-    { src: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=500&q=80', caption: '少年足球梦' },
-  ];
-
-  function renderGallery() {
-    const grid = document.getElementById('galleryGrid');
-    grid.innerHTML = galleryImages.map(img => `
-      <div class="item fade-in" data-src="${img.src}">
-        <img src="${img.src}" alt="${img.caption}" loading="lazy">
-        <div class="caption">${img.caption}</div>
-      </div>
-    `).join('');
-  }
-  renderGallery();
-
-  /* ===== 4. Lightbox ===== */
-  const lightbox     = document.getElementById('lightbox');
-  const lightboxImg  = document.getElementById('lightboxImg');
-  document.getElementById('galleryGrid').addEventListener('click', function(e) {
-    const item = e.target.closest('.item');
-    if (item) {
-      lightboxImg.src = item.dataset.src;
-      lightbox.classList.add('show');
-    }
-  });
-  lightbox.addEventListener('click', function() {
-    this.classList.remove('show');
-  });
-
-  /* ===== 5. 移动端导航切换 ===== */
-  document.getElementById('navToggle').addEventListener('click', function() {
-    document.getElementById('navLinks').classList.toggle('open');
-  });
-
-  /* ===== 6. 滚动高亮导航 & 渐入动画 ===== */
-  const sections = document.querySelectorAll('section[id]');
-  const navItems = document.querySelectorAll('.nav-links a');
-
-  function onScroll() {
-    // 导航高亮
-    let current = '';
-    sections.forEach(sec => {
-      const top = sec.offsetTop - 100;
-      if (window.scrollY >= top) current = sec.id;
-    });
-    navItems.forEach(a => {
-      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-    });
-
-    // 渐入动画
-    document.querySelectorAll('.fade-in').forEach(el => {
-      if (el.getBoundingClientRect().top < window.innerHeight - 80) {
-        el.classList.add('visible');
-      }
-    });
-  }
-
-  // 初始检查 + 滚动监听
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('load', onScroll);
-})();
-</script>
+<script src="js/app.js"></script>
 </body>
 </html>

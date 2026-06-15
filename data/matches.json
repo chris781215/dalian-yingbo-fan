@@ -1,0 +1,7 @@
+[
+  { "round": 15, "date": "2026-06-20", "time": "19:35", "home": "大连英博", "away": "上海海港", "score": null, "status": "未开始" },
+  { "round": 14, "date": "2026-06-14", "time": "19:35", "home": "武汉三镇", "away": "大连英博", "score": "1-2", "status": "已结束" },
+  { "round": 13, "date": "2026-05-26", "time": "19:35", "home": "大连英博", "away": "北京国安", "score": "3-3", "status": "已结束" },
+  { "round": 12, "date": "2026-05-18", "time": "19:35", "home": "山东泰山", "away": "大连英博", "score": "2-0", "status": "已结束" },
+  { "round": 11, "date": "2026-05-11", "time": "19:35", "home": "大连英博", "away": "成都蓉城", "score": "1-0", "status": "已结束" }
+]
